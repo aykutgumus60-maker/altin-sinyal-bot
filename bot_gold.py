@@ -37,13 +37,13 @@ INTERVAL = "5m"
 KLINE_LIMIT = 300          # Connors RSI'nin percent-rank(100) penceresi icin yeterli gecmis
 
 # Grafikte yukaridan asagiya sirayla verdigin esik degerleri:
-RSI_THRESHOLD = float(os.environ.get("RSI_THRESHOLD", 30))
-CRSI_THRESHOLD = float(os.environ.get("CRSI_THRESHOLD", 15))
-UO_THRESHOLD = float(os.environ.get("UO_THRESHOLD", 30))
-RVI_THRESHOLD = float(os.environ.get("RVI_THRESHOLD", 25))
+RSI_THRESHOLD = float(os.environ.get("RSI_THRESHOLD", 25))
+CRSI_THRESHOLD = float(os.environ.get("CRSI_THRESHOLD", 10))
+UO_THRESHOLD = float(os.environ.get("UO_THRESHOLD", 22))
+RVI_THRESHOLD = float(os.environ.get("RVI_THRESHOLD", 20))
 ROC_THRESHOLD = float(os.environ.get("ROC_THRESHOLD", -22))
 MAJORITY_THRESHOLD = float(os.environ.get("MAJORITY_THRESHOLD", -20))
-MFI_THRESHOLD = float(os.environ.get("MFI_THRESHOLD", 15))
+MFI_THRESHOLD = float(os.environ.get("MFI_THRESHOLD", 10))
 
 # SAT (asiri alinmis / overbought) icin aday esikler - henuz botun kendisinde
 # kullanilmiyor, sadece backtest_sat.py ile kalibrasyon amacli
