@@ -1,0 +1,40 @@
+name: ALTIN Multi Indicator AL Sinyali
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"   # her 5 dakikada bir (UTC)
+  workflow_dispatch: {}      # manuel calistirmak icin
+
+permissions:
+  contents: write
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Bagimliliklari kur
+        run: pip install -r requirements.txt
+
+      - name: Botu calistir
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.GOLD_TELEGRAM_CHAT_ID }}
+        run: python bot_gold.py
+
+      - name: state_gold.json degisikligini commitle
+        run: |
+          git config user.name "signal-bot"
+          git config user.email "signal-bot@users.noreply.github.com"
+          if [ -f state_gold.json ]; then
+            git add state_gold.json
+            git diff --cached --quiet || git commit -m "state guncelle [skip ci]"
+            git push
+          else
+            echo "state_gold.json henuz olusmadi, commit atlaniyor."
+          fi
